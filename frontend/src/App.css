@@ -1,6 +1,6 @@
 /* General Styles */
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
 
 * {
   margin: 0;
@@ -16,6 +16,7 @@
   --color-primary: #e20059;
   --color-secondary: #9dbc29;
   --yellow-variant: #ffb454;
+  --gray-variant: #999;
   --transition: all 400ms ease;
 
   --container-width-lg: 95%;
@@ -32,7 +33,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--color-bg);
   color: var(--color-white);
   line-height: 1.7;
@@ -53,4 +54,36 @@ h5 {
 
 h1 {
   font-size: 2.5rem;
+}
+
+.sign-in-card {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
+  padding: 45px;
+  border-radius: 10px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form label {
+  color: var(--gray-variant) ;
+}
+
+.excerpt h6 {
+  color: #3F3F3F;
+}
+
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+}
+
+.main-btn {
+  background-color: var(--color-primary);
+  border: none;
+  width: 100%;
 }
