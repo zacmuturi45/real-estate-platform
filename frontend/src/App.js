@@ -1,7 +1,9 @@
+import './App.css';
+
 function App() {
   return (
     <>
-      <h1>React Working</h1>
+      <div className="container-lgs">React Working</div>
     </>
   );
 }
