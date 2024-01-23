@@ -6,19 +6,19 @@ export default function SignIn() {
         <form>
             <div className="mb-3">
                 <label className="form-label">Email</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" />
                 <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div className="mb-3">
                 <label className="form-label">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" />
+                <input type="password" className="form-control" id="password" />
                 <div id="passwordHelp" className="form-text">
                     <a href="/">
                         Forgot your password?
                     </a>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary main-btn">Submit</button>
+            <button type="submit" className="btn btn-primary main-btn mt-3">Sign In</button>
         </form>
     </AuthCard>
   );
