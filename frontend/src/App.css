@@ -17,6 +17,7 @@
   --color-secondary: #9dbc29;
   --yellow-variant: #ffb454;
   --gray-variant: #999;
+  --color-white: #fff;
   --transition: all 400ms ease;
 
   --container-width-lg: 95%;
@@ -86,4 +87,20 @@ a {
   background-color: var(--color-primary);
   border: none;
   width: 100%;
+}
+
+.nav-bar {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
+}
+
+.nav-login-btn {
+  border-color: var(--yellow-variant);
+  padding: 6px 30px;
+}
+
+.nav-signup-btn {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: 0;
+  padding: 6px 30px;
 }

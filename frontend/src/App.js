@@ -1,12 +1,17 @@
 import './App.css';
+import Navbar from './Components/Navbar';
 import SignIn from './Components/SignIn';
+import SignUp from './Components/SignUp';
+
 
 function App() {
   return (
     <>
-      <div className="container-lgs">
+      <>
+        <Navbar />
         <SignIn />
-      </div>
+        <SignUp />
+      </>
     </>
   );
 }
