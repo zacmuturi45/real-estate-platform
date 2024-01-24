@@ -43,12 +43,12 @@ const dummyData = [
   },
 ];
 
-const Home = () => {
+export default function HomeCards() {
   return (
-    <div className="home-container container-lgs row">
+    <div className="home-container container-lgs row mt-4 gx-2">
       {dummyData.map((property) => (
         <div key={property.id} className="col-sm-3">
-          <div className="card property-card" style={{ width: "18rem" }}>
+          <div className="card property-card" >
             <img
               src={property.imageUrl}
               className="card-img-top"
@@ -81,6 +81,4 @@ const Home = () => {
       ))}
     </div>
   );
-};
-
-export default Home;
+}
