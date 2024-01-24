@@ -1,6 +1,6 @@
 /* General Styles */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap");
 
 * {
   margin: 0;
@@ -17,6 +17,7 @@
   --color-secondary: #9dbc29;
   --yellow-variant: #ffb454;
   --gray-variant: #999;
+  --gray-darker: #3f3f3f;
   --color-white: #fff;
   --transition: all 400ms ease;
 
@@ -34,7 +35,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: var(--color-bg);
   color: var(--color-white);
   line-height: 1.7;
@@ -73,11 +74,11 @@ h1 {
 }
 
 form label {
-  color: var(--gray-variant) ;
+  color: var(--gray-variant);
 }
 
 .excerpt h6 {
-  color: #3F3F3F;
+  color: #3f3f3f;
 }
 
 a {
@@ -91,7 +92,8 @@ a {
   width: 100%;
 }
 
-.nav-bar {
+.nav-bar,
+.property-card {
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
 }
 
@@ -105,4 +107,51 @@ a {
   color: var(--color-white);
   border: 0;
   padding: 6px 30px;
+}
+
+.home-container {
+  height: 100vh;
+  max-width: 62%;
+}
+
+.property-card,
+.property-card img {
+  border-radius: 0;
+  border: 0;
+}
+
+.card-amount {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.card-county {
+  color: var(--gray-darker);
+  width: 209px;
+  line-height: 28px;
+}
+
+.card-location,
+.card-room p,
+.card-bath p {
+  color: var(--gray-variant);
+  font-size: 12px;
+}
+
+.card-location p {
+  margin-bottom: 0;
+}
+
+.card-hr {
+  color: var(--gray-variant);
+  margin-top: 0;
+}
+
+.custom-card-footer {
+  padding: 0 1rem;
+}
+
+.card-room,
+.card-bath {
+  color: var(--color-primary);
 }
