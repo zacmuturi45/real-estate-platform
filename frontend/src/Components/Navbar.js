@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Logo from "../Assets/Logo.svg";
 
 export default function Navbar() {
@@ -8,12 +9,12 @@ export default function Navbar() {
           <img src={Logo} alt="shelter-scape logo" />
         </div>
         <div>
-          <button type="submit" className="btn btn-outline-danger nav-login-btn">
-            Login
-          </button>
-          <button type="submit" className="btn btn-primary ms-2 nav-signup-btn">
+          <Link to="/signin" className="btn btn-outline-danger nav-login-btn">
+            Sign in
+          </Link>
+          <Link to="/signup" className="btn btn-primary ms-2 nav-signup-btn">
             Sign Up
-          </button>
+          </Link>
         </div>
       </div>
     </nav>
