@@ -1,4 +1,5 @@
 import AuthCard from "./AuthCard";
+import { Link } from "react-router-dom";
 
 export default function SignIn() {
   return (
@@ -18,7 +19,7 @@ export default function SignIn() {
                     </a>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary main-btn mt-3">Sign In</button>
+            <Link type="submit" className="btn btn-primary main-btn mt-3" to="/">Sign In</Link>
         </form>
     </AuthCard>
   );

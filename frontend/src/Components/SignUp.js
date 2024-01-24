@@ -1,4 +1,5 @@
 import AuthCard from "./AuthCard";
+import { Link } from "react-router-dom";
 
 export default function SignUp(){
     return(
@@ -28,7 +29,7 @@ export default function SignUp(){
                     <label className="form-label">Confirm Password</label>
                     <input type="password" className="form-control" id="confirm_password" />
                 </div>
-                <button type="submit" className="btn btn-primary main-btn mt-3">Sign Up</button>
+                <Link type="submit" className="btn btn-primary main-btn mt-3" to="/">Sign Up</Link>
             </form>
         </AuthCard>
     )

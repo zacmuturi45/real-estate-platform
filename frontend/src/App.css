@@ -155,3 +155,37 @@ a {
 .card-bath {
   color: var(--color-primary);
 }
+
+.realtor-width {
+  width: 70%;
+}
+
+form.search label {
+  color: var(--yellow-variant);
+}
+
+.search-input {
+  border: 0;
+  padding-left: 0;
+}
+
+.search-form {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
+  padding: 15px;
+
+}
+
+.border-custom {
+  border-right: 1px solid var(--gray-variant);
+/*   height: 46px;
+  align-content: center;
+  display: inline-grid; */
+}
+
+.search-btn {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
