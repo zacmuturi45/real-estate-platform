@@ -2,9 +2,12 @@ from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, abort
 from models import db, User
 from flask_bcrypt import Bcrypt
+from serializers import UserSchema
+from flask_jwt_extended import JWTManager, create_access_token
 
 user_bp = Blueprint('user', __name__)
 bcrypt = Bcrypt()
+jwt = JWTManager()
 api = Api(user_bp) 
 
 post_args = reqparse.RequestParser()
@@ -22,13 +25,19 @@ patch_args.add_argument('email', type=str)
 patch_args.add_argument('password', type=str)
 #patch_args.add_argument('isAdmin', type=bool)
 
+login_args = reqparse.RequestParser() 
+login_args.add_argument('email', type=str, required=True)
+login_args.add_argument('password', type=str, required=True)
+
+
+user_schema = UserSchema()
 
 class Users(Resource):
 
     def get(self):
         users = User.query.all()
-        response = [user.to_dict() for user in users]
-        return response
+        #response = [user.to_dict() for user in users]
+        return user_schema.dump(users, many=True)
 
     def post(self):
         data = post_args.parse_args()
@@ -40,7 +49,19 @@ class Users(Resource):
             new_user = User(username=data['username'], email=data['email'], password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
-            return new_user.to_dict() 
+            return user_schema.dump(new_user)
+        
+class UserLogin(Resource):
+    def post(self):
+        data = login_args.parse_args()
+        user = User.query.filter_by(email=data['email']).first()
+        if not user:
+            abort(404, detail="user does not exist")
+        if not bcrypt.check_password_hash(user.password, data['password']):
+            abort(403, detail="Password is not correct")
+        metadata = {"username": user.username}
+        token = create_access_token(identity=user.id, additional_claims=metadata)
+        return {"jwt":token}
 
 class UserById(Resource):
     def get(self,id):
@@ -73,3 +94,4 @@ class UserById(Resource):
 
 api.add_resource(Users, '/users')
 api.add_resource(UserById, '/users/<int:id>')
+api.add_resource(UserLogin, '/login')
