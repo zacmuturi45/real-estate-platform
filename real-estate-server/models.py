@@ -24,6 +24,7 @@ class User(db.Model):
     enquiries = db.relationship('Enquiry', backref='user', lazy=True)
 
 class Property(db.Model, SerializerMixin):
+    serialize_rules = ('-users', '-saved_listings', '-enquiries',)
     __tablename__ = 'properties'
     
     id = db.Column(db.Integer, primary_key=True)
