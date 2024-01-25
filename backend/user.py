@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse, abort
 from models import db, User
 from flask_bcrypt import Bcrypt
 from serializers import UserSchema
-from flask_jwt_extended import JWTManager, create_access_token
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required
 
 user_bp = Blueprint('user', __name__)
 bcrypt = Bcrypt()
@@ -34,6 +34,7 @@ user_schema = UserSchema()
 
 class Users(Resource):
 
+    @jwt_required()
     def get(self):
         users = User.query.all()
         #response = [user.to_dict() for user in users]
