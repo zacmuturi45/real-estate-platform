@@ -1,23 +1,26 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, abort
 from models import db, User
+from flask_bcrypt import Bcrypt
 
 user_bp = Blueprint('user', __name__)
+bcrypt = Bcrypt()
 api = Api(user_bp) 
 
 post_args = reqparse.RequestParser()
-post_args.add_argument('id', type=int, required=True)
+#post_args.add_argument('id', type=int, required=True)
 post_args.add_argument('username', type=str, required=True)
 post_args.add_argument('email', type=str, required=True)
 post_args.add_argument('password', type=str, required=True)
-post_args.add_argument('isAdmin', type=bool, required=True)
+post_args.add_argument('confirm-password', type=str, required=True)
+#post_args.add_argument('isAdmin', type=bool, required=True)
 
 patch_args = reqparse.RequestParser()
-patch_args.add_argument('id', type=int)
+#patch_args.add_argument('id', type=int)
 patch_args.add_argument('username', type=str)
 patch_args.add_argument('email', type=str)
 patch_args.add_argument('password', type=str)
-patch_args.add_argument('isAdmin', type=bool)
+#patch_args.add_argument('isAdmin', type=bool)
 
 
 class Users(Resource):
@@ -29,13 +32,15 @@ class Users(Resource):
 
     def post(self):
         data = post_args.parse_args()
-        user = User.query.get(data.id)
-        if user:
-            abort(409, detail='user already exists')
-        new_product = User(**data)
-        db.session.add(new_product)
-        db.session.commit()
-        return new_product.to_dict() 
+        # user = User.query.get(data.id)
+        # if user:
+        #     abort(409, detail='user already exists')
+        if data['password'] == data['confirm-password']:
+            hashed_password = bcrypt.generate_password_hash(data['password'])
+            new_user = User(username=data['username'], email=data['email'], password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            return new_user.to_dict() 
 
 class UserById(Resource):
     def get(self,id):
