@@ -10,7 +10,8 @@ user_property = db.Table(
     db.Column('property_id', db.ForeignKey('properties.id'), primary_key=True),
 )
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
+    serialize_rules = ('-properties', '-saved_listings', '-enquiries',)
     __tablename__ = 'users'
     
     id = db.Column(db.Integer, primary_key=True)
