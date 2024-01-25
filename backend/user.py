@@ -3,7 +3,7 @@ from flask_restful import Resource, Api, reqparse, abort
 from models import db, User
 from flask_bcrypt import Bcrypt
 from serializers import UserSchema
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 user_bp = Blueprint('user', __name__)
 bcrypt = Bcrypt()
@@ -93,6 +93,20 @@ class UserById(Resource):
         db.session.commit()
         return{"detail": f"user with {id=} has been deleted successfully"}
 
+class UserByToken(Resource):
+        
+    @jwt_required()
+    def get(self):
+        current_user_id = get_jwt_identity()
+        current_user = User.query.get(current_user_id)
+
+        if not current_user:
+            abort(404, detail="User not found")
+
+        return user_schema.dump(current_user)
+
+
 api.add_resource(Users, '/users')
 api.add_resource(UserById, '/users/<int:id>')
 api.add_resource(UserLogin, '/login')
+api.add_resource(UserByToken, '/user-token')
