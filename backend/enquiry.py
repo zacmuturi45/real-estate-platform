@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, abort
 from models import db, Enquiry
+from flask_jwt_extended import jwt_required
 
 enquiry_bp = Blueprint('enquiry', __name__)
 api = Api(enquiry_bp) 
@@ -24,11 +25,13 @@ patch_args.add_argument('timestamp', type=str)
 
 class Enquiries(Resource):
 
+    @jwt_required()
     def get(self):
         enquiries = Enquiry.query.all()
         response = [enquiry.to_dict() for enquiry in enquiries]
         return response
 
+    @jwt_required()
     def post(self):
         data = post_args.parse_args()
         enquiry = Enquiry.query.get(data.id)
@@ -40,6 +43,7 @@ class Enquiries(Resource):
         return new_product.to_dict() 
 
 class EnquiryById(Resource):
+    @jwt_required()
     def get(self,id):
         enquiry = Enquiry.query.get(id)
         if not enquiry:
