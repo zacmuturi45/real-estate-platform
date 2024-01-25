@@ -4,8 +4,6 @@ import LoginUser from "./Pages/LoginUser";
 import SignUpUser from "./Pages/SignUpUser";
 import Home from "./Pages/Home";
 import SingleProperty from "./Pages/SingleProperty";
-import Header from "./Header";
-import Footer from "./Footer";
 
 function App() {
   return (
