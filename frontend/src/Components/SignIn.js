@@ -24,7 +24,7 @@ export default function SignIn() {
       });
 
       if (!response.ok) {
-        throw new Error("Error while validating user");
+        throw new Error("Error while validating user ß");
       }
 
       const data = await response.json();
