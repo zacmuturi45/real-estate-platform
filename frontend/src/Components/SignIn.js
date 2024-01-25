@@ -37,7 +37,7 @@ export default function SignIn() {
       history("/");
     } catch (error) {
       console.error("Login failed:", error.message);
-      setError("Error while validating user. Please try again.");
+      setError("Check your username and password and try again.");
     }
   };
 
