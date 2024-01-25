@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { PropertyContext } from "../Contexts/PropertyContext";
 
 const defaultImageUrl =
   "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwzfHxyZWFsJTIwZXN0YXRlfGVufDB8fHx8MTcwNjA3MDA1M3ww&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450";
 
 export default function HomeCards() {
-  const [propertyData, setPropertyData] = useState([]);
-
-  useEffect(() => {
-    fetch("/properties")
-      .then((res) => res.json())
-      .then((data) => setPropertyData(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
-
-  console.log(propertyData);
+  const { propertyData} = useContext(PropertyContext);
 
   return (
     <div className="home-container container-lgs row mt-4 gx-2">
