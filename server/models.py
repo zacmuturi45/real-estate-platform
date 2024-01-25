@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
 
@@ -22,7 +23,7 @@ class User(db.Model):
     saved_listings = db.relationship('SavedListing', backref='user', lazy=True)
     enquiries = db.relationship('Enquiry', backref='user', lazy=True)
 
-class Property(db.Model):
+class Property(db.Model, SerializerMixin):
     __tablename__ = 'properties'
     
     id = db.Column(db.Integer, primary_key=True)

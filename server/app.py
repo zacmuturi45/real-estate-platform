@@ -1,19 +1,18 @@
 from flask import Flask
 from flask_migrate import Migrate
-
 from models import db
+from property import property_bp, api as property_api
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///realestate.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
 migrate = Migrate(app, db)
 
-db.init_app(app)
-
-@app.route('/')
-def home():
-    return '<h1>REAL ESTATE</h1>'
+property_api.init_app(property_bp)
+app.register_blueprint(property_bp)
 
 
 if __name__ == '__main__':
