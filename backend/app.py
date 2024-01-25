@@ -6,6 +6,7 @@ from user import user_bp, api as user_api, bcrypt, jwt
 from savedlisting import savedlisting_bp, api as savedlisting_api
 from enquiry import enquiry_bp, api as enquiry_api
 from serializers import ma 
+from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -14,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'tvbubvhriefjkwerty='
 
 db.init_app(app)
+CORS(app)
 bcrypt.init_app(app)
 ma.init_app(app)
 jwt.init_app(app)
