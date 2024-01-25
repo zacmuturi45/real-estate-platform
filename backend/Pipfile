@@ -11,6 +11,9 @@ faker = "*"
 flask-restful = "*"
 sqlalchemy-serializer = "*"
 flask-bcrypt = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
