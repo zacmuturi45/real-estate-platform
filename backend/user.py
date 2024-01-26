@@ -105,8 +105,15 @@ class UserByToken(Resource):
 
         return user_schema.dump(current_user)
 
+class GetAdmin(Resource):
+    @jwt_required()
+    def get(self):
+        admin_user = User.query.filter(User.isAdmin==True).all()
+        return user_schema.dump(admin_user, many=True)
+
 
 api.add_resource(Users, '/users')
 api.add_resource(UserById, '/users/<int:id>')
 api.add_resource(UserLogin, '/login')
 api.add_resource(UserByToken, '/user-token')
+api.add_resource(GetAdmin, '/admins/all')

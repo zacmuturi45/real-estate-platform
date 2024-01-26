@@ -6,17 +6,16 @@ import Home from "./Pages/Home";
 import SingleProperty from "./Pages/SingleProperty";
 import { PropertyContext } from "./Contexts/PropertyContext";
 import { useEffect, useState } from "react";
-
-
+import AdminPage from "./Pages/AdminPage";
 
 function App() {
-
   // states
   const [propertyData, setPropertyData] = useState([]);
   const [user, setUser] = useState("");
 
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({});
 
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // session token
   let accessToken = localStorage.getItem("accessToken");
@@ -28,8 +27,9 @@ function App() {
       })
         .then((res) => res.json())
         .then((data) => {
-          setUserData(data)
-          setUser(data.username)
+          setUserData(data);
+          setUser(data.username);
+          setIsAdmin(data.isAdmin);
         });
     } else {
       setUser("");
@@ -49,12 +49,23 @@ function App() {
   };
 
   return (
-    <PropertyContext.Provider value={{ propertyData, user, handleLogout, userData, setUser }}>
+    <PropertyContext.Provider
+      value={{
+        propertyData,
+        user,
+        handleLogout,
+        userData,
+        setUser,
+        isAdmin,
+        accessToken,
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/signin" element={<LoginUser />}></Route>
           <Route path="/signup" element={<SignUpUser />}></Route>
+          <Route path="/admin" element={<AdminPage />}></Route>
           <Route path="/property/:id" element={<SingleProperty />}></Route>
         </Routes>
       </BrowserRouter>

@@ -196,7 +196,7 @@ form.search label {
   font-weight: 600;
 }
 
-.property-description p{
+.property-description p {
   color: var(--gray-variant);
 }
 
@@ -209,7 +209,7 @@ form.search label {
   padding: 35px;
 }
 
-.tour-card p{
+.tour-card p {
   margin-bottom: 0;
 }
 
@@ -221,6 +221,16 @@ form.search label {
   color: var(--gray-variant);
 }
 
-.guard h5{
+.guard h6,
+.dashboard h5,h6 {
   color: var(--gray-darker);
+}
+
+.dashboard h3 {
+  color: var(--color-primary);
+}
+.stats-cards {
+  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--gray-darker);
+  padding: 15px;
 }
