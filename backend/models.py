@@ -25,13 +25,15 @@ class User(db.Model, SerializerMixin):
     enquiries = db.relationship('Enquiry', backref='user', lazy=True)
     profile = db.relationship('Profile', backref='user', uselist=False)
 
-class Profile(db.Model):
+class Profile(db.Model, SerializerMixin):
     __tablename__ = 'profiles'
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(25))
     lastname = db.Column(db.String(25))
     email = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    serialize_rules = ('-user',)
 
 class Property(db.Model, SerializerMixin):
     serialize_rules = ('-users', '-saved_listings', '-enquiries',)
