@@ -7,23 +7,32 @@ import SingleProperty from "./Pages/SingleProperty";
 import { PropertyContext } from "./Contexts/PropertyContext";
 import { useEffect, useState } from "react";
 
-// states
+
 
 function App() {
+
+  // states
   const [propertyData, setPropertyData] = useState([]);
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState("");
+
+  const [userData, setUserData] = useState({})
+
+
+  // session token
   let accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    if(accessToken){
+    if (accessToken) {
       fetch("/user-token", {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
-      .then((res)=>res.json())
-      .then((data)=> setUser(data.username))
-    }
-    else{
-      setUser("")
+        .then((res) => res.json())
+        .then((data) => {
+          setUserData(data)
+          setUser(data.username)
+        });
+    } else {
+      setUser("");
     }
   }, [accessToken]);
 
@@ -40,7 +49,7 @@ function App() {
   };
 
   return (
-    <PropertyContext.Provider value={{ propertyData, user ,handleLogout}}>
+    <PropertyContext.Provider value={{ propertyData, user, handleLogout, userData, setUser }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>

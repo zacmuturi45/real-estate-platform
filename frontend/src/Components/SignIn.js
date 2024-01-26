@@ -1,6 +1,7 @@
 import AuthCard from "./AuthCard";
-import React, { useState } from "react";
+import React, { useState ,useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { PropertyContext } from "../Contexts/PropertyContext";
 
 export default function SignIn() {
   // state
@@ -9,6 +10,8 @@ export default function SignIn() {
   const [error, setError] = useState(null);
 
   const history = useNavigate();
+
+  const { userData, setUser } = useContext(PropertyContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,9 +36,11 @@ export default function SignIn() {
       const access = data.jwt;
       localStorage.setItem("accessToken", access);
 
+      setUser(userData.username)
+
       // Redirect to home
       history("/");
-      window.location.reload(true)
+
     } catch (error) {
       console.error("Login failed:", error.message);
       setError("Check your username and password and try again.");
