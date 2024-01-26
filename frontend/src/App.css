@@ -218,3 +218,7 @@ form.search label {
 .tour-card span {
   color: var(--gray-variant);
 }
+
+.guard h5{
+  color: var(--gray-darker);
+}
