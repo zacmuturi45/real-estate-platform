@@ -3,10 +3,13 @@ import Navbar from "../Components/Navbar";
 import { PropertyContext } from "../Contexts/PropertyContext";
 import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
+import { Link } from "react-router-dom";
 
 export default function AdminPage() {
-  const { user, isAdmin, propertyData, accessToken, } =
+  const { user, isAdmin, propertyData, accessToken } =
     useContext(PropertyContext);
+
+    console.log(!user)
 
   // state
 
@@ -54,8 +57,6 @@ export default function AdminPage() {
     }
   }, [accessToken]);
 
-
-
   return (
     <div>
       {!user ? (
@@ -66,6 +67,11 @@ export default function AdminPage() {
         <>
           <Navbar />
           <div className="container-lgs mt-4 dashboard">
+            <div className="d-flex align-content-center mt-3 mb-3">
+              <Link>
+                User {`>`} {user}
+              </Link>
+            </div>
             <h5>Dashboard 🖥</h5>
             <div className="row gx-2 mt-4">
               <div className="col-sm-3 stats-cards">
@@ -86,7 +92,11 @@ export default function AdminPage() {
               </div>
             </div>
             <h5 className="mt-4">Users 🙍‍♂️</h5>
-            <UserTable data={userStats} token={accessToken} setUsers={setUserStats}/>
+            <UserTable
+              data={userStats}
+              token={accessToken}
+              setUsers={setUserStats}
+            />
           </div>
         </>
       )}
