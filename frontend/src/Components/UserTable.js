@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 export default function UserTable({ data }) {
   const handleDelete = (id) => {
-    console.log(`Clicked id `,id)
+    fetch()
   };
   return (
     <table className="table table-striped table-hover mt-4 custom-table table-bordered">
@@ -21,10 +23,7 @@ export default function UserTable({ data }) {
             <td>{userData.email}</td>
             <td>{userData.isAdmin === false ? "Admin" : "Client"}</td>
             <td>
-              <i
-                className="fa-solid fa-ellipsis-vertical ms-3"
-                onClick={()=>(handleDelete(userData.id))}
-              ></i>
+              <Link onClick={() => handleDelete(userData.id)}>Delete</Link>
             </td>
           </tr>
         ))}
