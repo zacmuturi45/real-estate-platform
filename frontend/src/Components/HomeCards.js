@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { PropertyContext } from "../Contexts/PropertyContext";
 
 /* const defaultImageUrl =
@@ -6,10 +6,15 @@ import { PropertyContext } from "../Contexts/PropertyContext";
  */
 export default function HomeCards() {
   const { propertyData} = useContext(PropertyContext);
+  const [displayedProperties, setDisplayedProperties] = useState(8);
+
+  const loadMoreProperties = () => {
+    setDisplayedProperties((prevCount) => prevCount + 8);
+  };
 
   return (
     <div className="home-container container-lgs row mt-4 gx-2">
-      {propertyData.map((property) => (
+      {propertyData.slice(0, displayedProperties).map((property) => (
         <div key={property.id} className="col-sm-3 mb-2">
           <div className="card property-card h-100">
             <img
@@ -42,6 +47,11 @@ export default function HomeCards() {
           </div>
         </div>
       ))}
+      {propertyData.length > displayedProperties && (
+        <div className="col-sm-12 text-center mt-3">
+          <button className="btn btn-primary" onClick={loadMoreProperties}>Load More</button>
+        </div>
+      )}
     </div>
   );
 }
