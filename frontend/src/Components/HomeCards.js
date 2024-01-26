@@ -7,15 +7,20 @@ import { PropertyContext } from "../Contexts/PropertyContext";
 export default function HomeCards() {
   const { propertyData} = useContext(PropertyContext);
   const [displayedProperties, setDisplayedProperties] = useState(8);
+  const [selectedProperty, setSelectedProperty] = useState(null);
 
   const loadMoreProperties = () => {
     setDisplayedProperties((prevCount) => prevCount + 8);
   };
 
+  function handleModal(property) {
+    setSelectedProperty(property);
+  }
+
   return (
     <div className="home-container container-lgs row mt-4 gx-2">
       {propertyData.slice(0, displayedProperties).map((property) => (
-        <div key={property.id} className="col-sm-3 mb-2">
+        <div key={property.id} className="col-sm-3 mb-2" onClick={() => handleModal(property)}>
           <div className="card property-card h-100">
             <img
               src={property.image}
@@ -47,6 +52,45 @@ export default function HomeCards() {
           </div>
         </div>
       ))}
+          {selectedProperty && (
+            <>
+            <div className="modal-overlay">
+            <button id="modal-close-button" onClick={() => setSelectedProperty(null)}>&times;</button>
+            </div>
+            <div id="modal" className="col-sm-3 mb-2">
+              <div id="modal-content" className="card property-card h-100">
+                <img
+                  src={selectedProperty.image}
+                  className="card-img-top"
+                  id="modal-image"
+                  alt="property alt"
+                />
+                <div className="card-body">
+                  <div className="card-amount">
+                    <h6>Ksh. {selectedProperty.price}</h6>
+                  </div>
+                  <div className="card-county">
+                    <h5>{selectedProperty.location}</h5>
+                  </div>
+                  <div className="card-location">
+                    <p>{selectedProperty.title}</p>
+                  </div>
+                </div>
+                <hr className="card-hr" />
+                <div className="d-flex justify-content-between custom-card-footer">
+                  <div className="card-room d-flex">
+                    <i className="fa-solid fa-bed me-2"></i>
+                    <p>{`${selectedProperty.bedrooms || 1} Bedrooms`}</p>
+                  </div>
+                  <div className="card-bath d-flex">
+                    <i className="fa-solid fa-bath me-2"></i>
+                    <p>{`${selectedProperty.bathrooms || 3} Bathrooms`}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </>
+          )}
       {propertyData.length > displayedProperties && (
         <div className="col-sm-12 text-center mt-3">
           <button className="btn btn-primary main-btn" onClick={loadMoreProperties}>Load More</button>
