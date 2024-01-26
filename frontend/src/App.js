@@ -15,11 +15,16 @@ function App() {
   let accessToken = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    fetch("/user-token", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-    .then((res)=>res.json())
-    .then((data)=> setUser(data.username))
+    if(accessToken){
+      fetch("/user-token", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res)=>res.json())
+      .then((data)=> setUser(data.username))
+    }
+    else{
+      setUser("")
+    }
   }, [accessToken]);
 
   useEffect(() => {
@@ -29,8 +34,13 @@ function App() {
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    setUser("");
+  };
+
   return (
-    <PropertyContext.Provider value={{ propertyData, user }}>
+    <PropertyContext.Provider value={{ propertyData, user ,handleLogout}}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>
