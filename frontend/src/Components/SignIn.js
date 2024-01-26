@@ -35,6 +35,7 @@ export default function SignIn() {
 
       // Redirect to home
       history("/");
+      window.location.reload(true)
     } catch (error) {
       console.error("Login failed:", error.message);
       setError("Check your username and password and try again.");

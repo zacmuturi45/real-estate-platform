@@ -11,6 +11,16 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [propertyData, setPropertyData] = useState([]);
+  const [user, setUser] = useState("")
+  let accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    fetch("/user-token", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    })
+    .then((res)=>res.json())
+    .then((data)=> setUser(data.username))
+  }, [accessToken]);
 
   useEffect(() => {
     fetch("/properties")
@@ -20,7 +30,7 @@ function App() {
   }, []);
 
   return (
-    <PropertyContext.Provider value={{ propertyData }}>
+    <PropertyContext.Provider value={{ propertyData, user }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />}></Route>

@@ -10,7 +10,7 @@ export default function HomeCards() {
   return (
     <div className="home-container container-lgs row mt-4 gx-2">
       {propertyData.map((property) => (
-        <div key={property.id} className="col-sm-3 mb-4">
+        <div key={property.id} className="col-sm-3 mb-2">
           <div className="card property-card h-100">
             <img
               src={defaultImageUrl}
