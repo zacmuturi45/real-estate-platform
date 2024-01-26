@@ -86,7 +86,6 @@ def seed_file():
             if u not in property.users:
                 property.users.append(u)
                 db.session.add(property)
-                db.session.commit()
                 
                 listing = SavedListing(
                     user_id=u.id,
@@ -102,10 +101,9 @@ def seed_file():
                 Listings.append(listing)
                 enquiries.append(enquiry)
             
-    db.session.add_all(Listings, enquiries, Profiles)
+    db.session.add_all(Listings + enquiries + Profiles)
     db.session.commit()
     db.session.close()
-        
         
 if __name__ == '__main__':
     with app.app_context():
