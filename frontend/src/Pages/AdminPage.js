@@ -5,13 +5,13 @@ import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
 
 export default function AdminPage() {
-  const { user, isAdmin, propertyData, accessToken } =
+  const { user, isAdmin, propertyData, accessToken, } =
     useContext(PropertyContext);
 
   // state
 
-  const [userStats, setUserStats] = useState({});
-  const [adminStats, setAdminStats] = useState({});
+  const [userStats, setUserStats] = useState([]);
+  const [adminStats, setAdminStats] = useState([]);
 
   useEffect(() => {
     if (accessToken) {
@@ -70,7 +70,7 @@ export default function AdminPage() {
               </div>
             </div>
             <h5 className="mt-4">Users 🙍‍♂️</h5>
-            <UserTable data={userStats}/>
+            <UserTable data={userStats} token={accessToken} setUsers={setUserStats}/>
           </div>
         </>
       )}
