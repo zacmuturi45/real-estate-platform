@@ -7,7 +7,7 @@ export default function AuthGuard() {
         <div className="text-center">
           <img src={Logo} alt="shelter-scape logo" />
           <div className="mt-3 mb-3 guard">
-            <h5>You are Not Authorized to view this page</h5>
+            <h6>You are Not Authorized to view this page</h6>
           </div>
         </div>
       </div>
