@@ -12,6 +12,7 @@ export default function AdminPage() {
 
   const [userStats, setUserStats] = useState([]);
   const [adminStats, setAdminStats] = useState([]);
+  const [enquiryStats, setEnquiryStats] = useState([]);
 
   useEffect(() => {
     if (accessToken) {
@@ -40,6 +41,21 @@ export default function AdminPage() {
     }
   }, [accessToken]);
 
+  useEffect(() => {
+    if (accessToken) {
+      fetch("/enquiries", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setEnquiryStats(data);
+        });
+    } else {
+    }
+  }, [accessToken]);
+
+
+
   return (
     <div>
       {!user ? (
@@ -62,7 +78,7 @@ export default function AdminPage() {
               </div>
               <div className="col-sm-3 stats-cards">
                 <h6>No of Enquiries</h6>
-                <h3>11</h3>
+                <h3>{enquiryStats.length}</h3>
               </div>
               <div className="col-sm-3 stats-cards">
                 <h6>No of Admins</h6>

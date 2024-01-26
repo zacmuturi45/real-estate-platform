@@ -60,7 +60,7 @@ class SavedListing(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     tag = db.Column(db.String(50))
 
-class Enquiry(db.Model):
+class Enquiry(db.Model, SerializerMixin):
     __tablename__ = 'enquiries'
     
     id = db.Column(db.Integer, primary_key=True)
