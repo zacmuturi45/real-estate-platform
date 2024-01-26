@@ -1,9 +1,30 @@
 import { Link } from "react-router-dom";
 
-export default function UserTable({ data }) {
+export default function UserTable({ data, token, setUsers }) {
   const handleDelete = (id) => {
-    fetch()
+    fetch(`/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(() => {
+        alert("User deleted successfully");
+        console.log("User deleted successfully");
+        setUsers((prevUsers) => prevUsers.filter(user => user.id !== id));
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error.message);
+      });
   };
+
   return (
     <table className="table table-striped table-hover mt-4 custom-table table-bordered">
       <thead>
@@ -23,7 +44,9 @@ export default function UserTable({ data }) {
             <td>{userData.email}</td>
             <td>{userData.isAdmin === false ? "Admin" : "Client"}</td>
             <td>
-              <Link onClick={() => handleDelete(userData.id)}>Delete</Link>
+              <Link to="#" onClick={() => handleDelete(userData.id)}>
+                Delete
+              </Link>
             </td>
           </tr>
         ))}
