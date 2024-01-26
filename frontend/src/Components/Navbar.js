@@ -4,13 +4,7 @@ import React, { useContext } from "react";
 import { PropertyContext } from "../Contexts/PropertyContext";
 
 export default function Navbar() {
-  const { user } = useContext(PropertyContext);
-
-  const handleLogout = () =>{
-    localStorage.removeItem("accessToken")
-    window.location.reload(true)
-    console.log("Logged out")
-  } 
+  const { user , handleLogout } = useContext(PropertyContext);
   return (
     <nav className="nav-bar">
       <div className="d-flex justify-content-between container-lgs align-items-center">
