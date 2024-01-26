@@ -229,8 +229,19 @@ form.search label {
 .dashboard h3 {
   color: var(--color-primary);
 }
+
 .stats-cards {
   box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
   border: 1px solid var(--gray-darker);
   padding: 15px;
 }
+
+.custom-table tbody tr {
+  cursor: pointer;
+}
+
+.custom-table tbody tr:hover {
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+

@@ -1,10 +1,12 @@
-import { useContext, useState ,useEffect} from "react";
+import { useContext, useState, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import { PropertyContext } from "../Contexts/PropertyContext";
 import AuthGuard from "../Components/AuthGuard";
+import UserTable from "../Components/UserTable";
 
 export default function AdminPage() {
-  const { user, isAdmin, propertyData, accessToken } = useContext(PropertyContext);
+  const { user, isAdmin, propertyData, accessToken } =
+    useContext(PropertyContext);
 
   // state
 
@@ -18,7 +20,7 @@ export default function AdminPage() {
       })
         .then((res) => res.json())
         .then((data) => {
-            setUserStats(data)
+          setUserStats(data);
         });
     } else {
       //setUser("");
@@ -32,12 +34,11 @@ export default function AdminPage() {
       })
         .then((res) => res.json())
         .then((data) => {
-            setAdminStats(data)
+          setAdminStats(data);
         });
     } else {
     }
   }, [accessToken]);
-  
 
   return (
     <div>
@@ -50,7 +51,7 @@ export default function AdminPage() {
           <Navbar />
           <div className="container-lgs mt-4 dashboard">
             <h5>Dashboard 🖥</h5>
-            <div className="row mt-4 gx-2">
+            <div className="row gx-2 mt-4">
               <div className="col-sm-3 stats-cards">
                 <h6>No of Properties</h6>
                 <h3>{propertyData.length}</h3>
@@ -68,6 +69,8 @@ export default function AdminPage() {
                 <h3>{adminStats.length}</h3>
               </div>
             </div>
+            <h5 className="mt-4">Users 🙍‍♂️</h5>
+            <UserTable data={userStats}/>
           </div>
         </>
       )}
