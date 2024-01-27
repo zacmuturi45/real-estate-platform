@@ -4,12 +4,12 @@ import { PropertyContext } from "../Contexts/PropertyContext";
 import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
 import { Link } from "react-router-dom";
+import PropertyTable from "../Components/PropertyTable";
 
 export default function AdminPage() {
   const { user, isAdmin, propertyData, accessToken } =
     useContext(PropertyContext);
 
-    console.log(isAdmin)
   // state
 
   const [userStats, setUserStats] = useState([]);
@@ -96,6 +96,7 @@ export default function AdminPage() {
               token={accessToken}
               setUsers={setUserStats}
             />
+            <PropertyTable data={propertyData} token={accessToken} />
           </div>
         </>
       )}
