@@ -121,7 +121,7 @@ a {
   object-fit: cover;
 }
 
-.card-amount {
+.card-amount h6{
   color: var(--color-primary);
   text-decoration: underline;
 }
@@ -222,7 +222,8 @@ form.search label {
 }
 
 .guard h6,
-.dashboard h5,h6 {
+.dashboard h5,
+h6 {
   color: var(--gray-darker);
 }
 
@@ -245,3 +246,12 @@ form.search label {
   background: var(--color-primary);
 }
 
+.properties-add {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+}
+
+#modal-heading {
+  color: var(--gray-darker);
+}
