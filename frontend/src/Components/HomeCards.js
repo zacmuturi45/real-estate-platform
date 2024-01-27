@@ -49,7 +49,7 @@ export default function HomeCards() {
       ))}
       {propertyData.length > displayedProperties && (
         <div className="col-sm-12 text-center mt-3">
-          <button className="btn btn-primary" onClick={loadMoreProperties}>Load More</button>
+          <button className="btn btn-primary main-btn" onClick={loadMoreProperties}>Load More</button>
         </div>
       )}
     </div>
