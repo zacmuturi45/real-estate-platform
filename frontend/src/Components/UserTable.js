@@ -42,7 +42,7 @@ export default function UserTable({ data, token, setUsers }) {
             <th scope="row">{userData.id}</th>
             <td>{userData.username}</td>
             <td>{userData.email}</td>
-            <td>{userData.isAdmin === false ? "Admin" : "Client"}</td>
+            <td>{userData.isAdmin === false ? "Client" : "Admin"}</td>
             <td>
               <Link to="#" onClick={() => handleDelete(userData.id)}>
                 Delete
