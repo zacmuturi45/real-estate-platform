@@ -9,8 +9,7 @@ export default function AdminPage() {
   const { user, isAdmin, propertyData, accessToken } =
     useContext(PropertyContext);
 
-    console.log(!user)
-
+    console.log(isAdmin)
   // state
 
   const [userStats, setUserStats] = useState([]);
@@ -59,7 +58,7 @@ export default function AdminPage() {
 
   return (
     <div>
-      {!user ? (
+      {!isAdmin ? (
         <>
           <AuthGuard />
         </>
