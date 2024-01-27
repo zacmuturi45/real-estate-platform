@@ -34,7 +34,7 @@ function App() {
     } else {
       setUser("");
     }
-  }, [accessToken]);
+  }, []);
 
   useEffect(() => {
     fetch("/properties")

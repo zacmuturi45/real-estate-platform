@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { PropertyContext } from "../Contexts/PropertyContext";
+import { Link } from "react-router-dom";
 
 /* const defaultImageUrl =
   "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwzfHxyZWFsJTIwZXN0YXRlfGVufDB8fHx8MTcwNjA3MDA1M3ww&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450";
@@ -21,6 +22,7 @@ export default function HomeCards() {
     <div className="home-container container-lgs row mt-4 gx-2">
       {propertyData.slice(0, displayedProperties).map((property) => (
         <div key={property.id} className="col-sm-3 mb-2" onClick={() => handleModal(property)}>
+          <Link to={`/property/${property.id}`}>
           <div className="card property-card h-100">
             <img
               src={property.image}
@@ -50,6 +52,7 @@ export default function HomeCards() {
               </div>
             </div>
           </div>
+          </Link>
         </div>
       ))}
           {selectedProperty && (
