@@ -121,7 +121,7 @@ a {
   object-fit: cover;
 }
 
-.card-amount h6{
+.card-amount h6 {
   color: var(--color-primary);
   text-decoration: underline;
 }
@@ -254,4 +254,18 @@ h6 {
 
 #modal-heading {
   color: var(--gray-darker);
+}
+
+.custom-submit-btn {
+  background-color: var(--color-primary);
+  border: 0;
+}
+
+.custom-close-btn {
+  background-color: var(--gray-darker);
+  border: 0;
+}
+
+.custom-hr {
+  color: var(--gray-variant);
 }

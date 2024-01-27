@@ -36,8 +36,8 @@ export default function PropertyModal(){
                     </form>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-primary">Send message</button>
+                    <button type="button" className="btn btn-secondary custom-close-btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary custom-submit-btn">Send message</button>
                 </div>
                 </div>
             </div>

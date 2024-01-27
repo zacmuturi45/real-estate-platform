@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PropertyModal from "./PropertyModal";
+import React, { useState } from "react";
 
 export default function PropertyTable({ data }) {
   const openModal = () => {
@@ -12,6 +13,13 @@ export default function PropertyTable({ data }) {
   const handleClick = (id) => {
     console.log("Clicked id: ", id);
   };
+
+  const [displayedData, setDisplayedData] = useState(10);
+
+  const loadMoreData = () => {
+    setDisplayedData((prevCount) => prevCount + 10);
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between align-items-center">
@@ -36,7 +44,7 @@ export default function PropertyTable({ data }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((property) => (
+          {data.slice(0, displayedData).map((property) => (
             <tr key={property.id}>
               <td>{property.id}</td>
               <td>{property.property_type}</td>
@@ -50,6 +58,13 @@ export default function PropertyTable({ data }) {
           ))}
         </tbody>
       </table>
+      {data.length > displayedData && (
+        <div className="col-sm-12 text-center mt-3">
+          <button className="btn btn-primary main-btn" onClick={loadMoreData}>
+            Load More
+          </button>
+        </div>
+      )}
       <PropertyModal />
     </>
   );

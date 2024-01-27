@@ -96,7 +96,9 @@ export default function AdminPage() {
               token={accessToken}
               setUsers={setUserStats}
             />
+            <hr className="custom-hr mt-4" />
             <PropertyTable data={propertyData} token={accessToken} />
+            <hr className="custom-hr mt-4" />
           </div>
         </>
       )}
