@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, abort
-from models import db, User
+from models import db, User, Enquiry, SavedListing
 from flask_bcrypt import Bcrypt
-from serializers import UserSchema
+from serializers import UserSchema, EnquirySchema
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 user_bp = Blueprint('user', __name__)
@@ -36,7 +36,7 @@ class Users(Resource):
 
     @jwt_required()
     def get(self):
-        users = User.query.all()
+        users = User.query.options(db.joinedload(User.enquiries)).all()
         #response = [user.to_dict() for user in users]
         return user_schema.dump(users, many=True)
 
@@ -89,6 +89,15 @@ class UserById(Resource):
         user = User.query.filter_by(id=id).first()
         if not user:
             abort(404, detail=f'user with {id=} does not exist')
+
+        enquiries = Enquiry.query.filter_by(user_id=user.id).all()
+        for enquiry in enquiries:
+            db.session.delete(enquiry)
+
+        saved_listings = SavedListing.query.filter_by(user_id=user.id).all()
+        for saved_listing in saved_listings:
+            db.session.delete(saved_listing)
+        
         db.session.delete(user)
         db.session.commit()
         return{"detail": f"user with {id=} has been deleted successfully"}

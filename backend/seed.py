@@ -52,6 +52,8 @@ def seed_file():
         db.session.add(user)
         users.append(user)
     db.session.commit()
+
+    property_types = ['Apartment', 'House', 'Condo', 'Townhouse', 'Villa', 'Cottage']
     
     properties = []
     for _ in range(100):
@@ -61,7 +63,8 @@ def seed_file():
             price=randint(50000, 1000000),
             location=choice(locations),
             image=choice(images),
-            isAvailable=choice([True, False])
+            isAvailable=choice([True, False]),
+            property_type=choice(property_types)
         )
         db.session.add(property)
         properties.append(property)
