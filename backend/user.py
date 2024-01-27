@@ -23,7 +23,7 @@ patch_args = reqparse.RequestParser()
 patch_args.add_argument('username', type=str)
 patch_args.add_argument('email', type=str)
 patch_args.add_argument('password', type=str)
-#patch_args.add_argument('isAdmin', type=bool)
+patch_args.add_argument('isAdmin', type=bool)
 
 login_args = reqparse.RequestParser() 
 login_args.add_argument('email', type=str, required=True)
