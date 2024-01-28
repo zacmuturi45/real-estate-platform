@@ -1,7 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_restful import Resource, Api, reqparse, abort
 from models import db, Property
 from flask_jwt_extended import jwt_required
+from sqlalchemy import or_
 
 property_bp = Blueprint('property', __name__)
 api = Api(property_bp) 
@@ -72,6 +73,41 @@ class PropertyById(Resource):
         db.session.delete(property)
         db.session.commit()
         return{"detail": f"property with {id=} has been deleted successfully"}
+    
+class PropertySearch(Resource):
+    def get(self):
+        location = request.args.get('location')
+        price_min = request.args.get('price_min')
+        price_max = request.args.get('price_max')
+        property_type = request.args.get('type')
+
+        print("Location:", location)
+        print("Price Min:", price_min)
+        print("Price Max:", price_max)
+        print("Property Type:", property_type)
+
+        query = Property.query
+
+        if location:
+            query = query.filter(Property.location.ilike(f'%{location}%'))
+
+        if price_min and price_max:
+            query = query.filter(Property.price.between(float(price_min), float(price_max)))
+        elif price_min:
+            query = query.filter(Property.price >= float(price_min))
+        elif price_max:
+            query = query.filter(Property.price <= float(price_max))
+
+        if property_type:
+            query = query.filter(Property.property_type.ilike(f'%{property_type}%'))
+
+        print("Final Query:", query)
+        
+        properties = query.all()
+        response = [property.to_dict() for property in properties]
+        return response
+
 
 api.add_resource(Properties, '/properties')
 api.add_resource(PropertyById, '/properties/<int:id>')
+api.add_resource(PropertySearch, '/properties/search')
