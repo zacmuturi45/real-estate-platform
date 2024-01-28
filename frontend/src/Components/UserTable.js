@@ -2,11 +2,6 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
 export default function UserTable({ data, token, setUsers }) {
-  const [displayedData, setDisplayedData] = useState(10);
-
-  const loadMoreData = () => {
-    setDisplayedData((prevCount) => prevCount + 10);
-  };
 
   const handleDelete = (id) => {
     fetch(`/users/${id}`, {
@@ -33,7 +28,7 @@ export default function UserTable({ data, token, setUsers }) {
   };
 
   return (
-    <>
+    <div style={{ height: "650px", overflow: "auto" }}>
       <table className="table table-striped table-hover mt-4 custom-table table-bordered">
         <thead>
           <tr>
@@ -45,7 +40,7 @@ export default function UserTable({ data, token, setUsers }) {
           </tr>
         </thead>
         <tbody>
-          {data.slice(0, displayedData).map((userData) => (
+          {data.map((userData) => (
             <tr key={userData.id}>
               <th scope="row">{userData.id}</th>
               <td>{userData.username}</td>
@@ -60,16 +55,6 @@ export default function UserTable({ data, token, setUsers }) {
           ))}
         </tbody>
       </table>
-      {data.length > displayedData && (
-        <div className="col-sm-12 text-center mt-3">
-          <button
-            className="btn btn-primary main-btn"
-            onClick={loadMoreData}
-          >
-            Load More
-          </button>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
