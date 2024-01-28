@@ -8,13 +8,14 @@ property_bp = Blueprint('property', __name__)
 api = Api(property_bp) 
 
 post_args = reqparse.RequestParser()
-post_args.add_argument('id', type=int, required=True)
+#post_args.add_argument('id', type=int, required=True)
 post_args.add_argument('title', type=str, required=True)
 post_args.add_argument('description', type=str, required=True)
 post_args.add_argument('price', type=float, required=True)
 post_args.add_argument('location', type=str, required=True)
 post_args.add_argument('image', type=str, required=True)
 post_args.add_argument('isAvailable', type=bool, required=True)
+post_args.add_argument('property_type', type=str, required=True)
 
 patch_args = reqparse.RequestParser()
 patch_args.add_argument('title', type=str)
@@ -32,12 +33,8 @@ class Properties(Resource):
         response = [property.to_dict() for property in properties]
         return response
 
-    @jwt_required()
     def post(self):
         data = post_args.parse_args()
-        property = Property.query.get(data.id)
-        if property:
-            abort(409, detail='property already exists')
         new_product = Property(**data)
         db.session.add(new_product)
         db.session.commit()
