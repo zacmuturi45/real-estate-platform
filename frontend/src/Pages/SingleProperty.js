@@ -64,7 +64,7 @@ export default function SingleProperty() {
                   className="btn btn-primary nav-signup-btn mt-2"
                   onClick={() => handleEnquiry()}
                 >
-                  Request Tour
+                  Make an Enquiry
                 </Link>
                 <Link className="btn btn-primary nav-signup-btn mt-2">
                   Add to Favorites
