@@ -5,6 +5,7 @@ import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
 import { Link } from "react-router-dom";
 import PropertyTable from "../Components/PropertyTable";
+import EnquiriesTable from "../Components/EnquiriesTable";
 
 export default function AdminPage() {
   const { user, isAdmin, propertyData, accessToken } =
@@ -66,9 +67,9 @@ export default function AdminPage() {
         <>
           <Navbar />
           <div className="container-lgs mt-4 dashboard">
-            <div className="d-flex align-content-center mt-3 mb-3">
+            <div className="d-flex justify-content-end align-content-center mt-3 mb-3">
               <Link>
-                User {`>`} {user}
+                {isAdmin ? "Admin" : "User"} {`>`} {user}
               </Link>
             </div>
             <h5>Dashboard 🖥</h5>
@@ -99,6 +100,7 @@ export default function AdminPage() {
             <hr className="custom-hr mt-4" />
             <PropertyTable data={propertyData} token={accessToken} />
             <hr className="custom-hr mt-4" />
+            <EnquiriesTable token={accessToken} />
           </div>
         </>
       )}

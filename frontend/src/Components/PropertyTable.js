@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PropertyModal from "./PropertyModal";
 import React, { useState } from "react";
 
-export default function PropertyTable({ data }) {
+export default function PropertyTable({ data, token }) {
   const openModal = () => {
     const modal = new window.bootstrap.Modal(
       document.getElementById("propertyModal")
@@ -11,13 +11,26 @@ export default function PropertyTable({ data }) {
   };
 
   const handleClick = (id) => {
-    console.log("Clicked id: ", id);
-  };
-
-  const [displayedData, setDisplayedData] = useState(10);
-
-  const loadMoreData = () => {
-    setDisplayedData((prevCount) => prevCount + 10);
+    fetch(`/properties/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(() => {
+        alert("Property deleted successfully");
+        console.log("Property deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error.message);
+      });
   };
 
   return (
@@ -32,39 +45,37 @@ export default function PropertyTable({ data }) {
           +
         </button>
       </div>
-      <table className="table table-striped table-hover mt-4 custom-table table-bordered">
-        <thead>
-          <tr>
-            <th scope="col">Property Id</th>
-            <th scope="col">Property Type</th>
-            <th scope="col">Property Title</th>
-            <th scope="col">Property Location</th>
-            <th scope="col">Property Price</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.slice(0, displayedData).map((property) => (
-            <tr key={property.id}>
-              <td>{property.id}</td>
-              <td>{property.property_type}</td>
-              <td>{property.title}</td>
-              <td>{property.location}</td>
-              <td>{property.price}</td>
-              <td>
-                <Link onClick={() => handleClick(property.id)}>Delete</Link>
-              </td>
+      <div style={{ height: "650px", overflow: "auto" }}>
+        <table
+          className="table table-striped table-hover mt-4 custom-table table-bordered"
+          style={{ height: "450px" }}
+        >
+          <thead>
+            <tr>
+              <th scope="col">Property Id</th>
+              <th scope="col">Property Type</th>
+              <th scope="col">Property Title</th>
+              <th scope="col">Property Location</th>
+              <th scope="col">Property Price</th>
+              <th scope="col">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      {data.length > displayedData && (
-        <div className="col-sm-12 text-center mt-3">
-          <button className="btn btn-primary main-btn" onClick={loadMoreData}>
-            Load More
-          </button>
-        </div>
-      )}
+          </thead>
+          <tbody>
+            {data.map((property) => (
+              <tr key={property.id}>
+                <td>{property.id}</td>
+                <td>{property.property_type}</td>
+                <td>{property.title}</td>
+                <td>{property.location}</td>
+                <td>{property.price}</td>
+                <td>
+                  <Link onClick={() => handleClick(property.id)}>Delete</Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <PropertyModal />
     </>
   );

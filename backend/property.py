@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_restful import Resource, Api, reqparse, abort
-from models import db, Property
+from models import db, Property, Enquiry, SavedListing
 from flask_jwt_extended import jwt_required
 from sqlalchemy import or_
 
@@ -67,6 +67,17 @@ class PropertyById(Resource):
         property = Property.query.filter_by(id=id).first()
         if not property:
             abort(404, detail=f'property with {id=} does not exist')
+
+        enquiries = Enquiry.query.filter_by(property_id=property.id).all()
+
+        for enquiry in enquiries:
+            db.session.delete(enquiry)
+        
+        saved_listings = SavedListing.query.filter_by(property_id=property.id).all()
+        
+        for saved_listing in saved_listings:
+            db.session.delete(saved_listing)
+
         db.session.delete(property)
         db.session.commit()
         return{"detail": f"property with {id=} has been deleted successfully"}
