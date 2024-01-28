@@ -7,11 +7,11 @@ enquiry_bp = Blueprint('enquiry', __name__)
 api = Api(enquiry_bp) 
 
 post_args = reqparse.RequestParser()
-post_args.add_argument('id', type=int, required=True)
+#post_args.add_argument('id', type=int, required=True)
 post_args.add_argument('user_id', type=int, required=True)
 post_args.add_argument('property_id', type=int, required=True)
 post_args.add_argument('message', type=str)
-post_args.add_argument('timestamp', type=str , required=True)
+#post_args.add_argument('timestamp', type=str , required=True)
 
 
 patch_args = reqparse.RequestParser()
@@ -34,9 +34,6 @@ class Enquiries(Resource):
     @jwt_required()
     def post(self):
         data = post_args.parse_args()
-        enquiry = Enquiry.query.get(data.id)
-        if enquiry:
-            abort(409, detail='enquiry already exists')
         new_product = Enquiry(**data)
         db.session.add(new_product)
         db.session.commit()

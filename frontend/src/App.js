@@ -12,6 +12,7 @@ function App() {
   // states
   const [propertyData, setPropertyData] = useState([]);
   const [user, setUser] = useState("");
+  const [userid, setUserId] = useState("")
 
   const [userData, setUserData] = useState({});
 
@@ -30,6 +31,7 @@ function App() {
           setUserData(data);
           setUser(data.username);
           setIsAdmin(data.isAdmin);
+          setUserId(data.id);
         });
     } else {
       setUser("");
@@ -53,6 +55,7 @@ function App() {
       value={{
         propertyData,
         user,
+        userid,
         handleLogout,
         userData,
         setUser,
