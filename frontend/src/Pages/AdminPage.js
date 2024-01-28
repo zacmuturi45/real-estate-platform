@@ -4,12 +4,11 @@ import { PropertyContext } from "../Contexts/PropertyContext";
 import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
 import { Link } from "react-router-dom";
+import PropertyTable from "../Components/PropertyTable";
 
 export default function AdminPage() {
   const { user, isAdmin, propertyData, accessToken } =
     useContext(PropertyContext);
-
-    console.log(!user)
 
   // state
 
@@ -59,7 +58,7 @@ export default function AdminPage() {
 
   return (
     <div>
-      {!user ? (
+      {!isAdmin ? (
         <>
           <AuthGuard />
         </>
@@ -73,20 +72,20 @@ export default function AdminPage() {
               </Link>
             </div>
             <h5>Dashboard 🖥</h5>
-            <div className="row gx-2 mt-4">
-              <div className="col-sm-3 stats-cards">
+            <div className="row gx-2 mt-4 stats-count">
+              <div className="col-sm-3 stats-cards stats-padding">
                 <h6>No of Properties</h6>
                 <h3>{propertyData.length}</h3>
               </div>
-              <div className="col-sm-3 stats-cards">
+              <div className="col-sm-3 stats-cards stats-padding">
                 <h6>No of Users</h6>
                 <h3>{userStats.length}</h3>
               </div>
-              <div className="col-sm-3 stats-cards">
+              <div className="col-sm-3 stats-cards stats-padding">
                 <h6>No of Enquiries</h6>
                 <h3>{enquiryStats.length}</h3>
               </div>
-              <div className="col-sm-3 stats-cards">
+              <div className="col-sm-3 stats-cards stats-padding">
                 <h6>No of Admins</h6>
                 <h3>{adminStats.length}</h3>
               </div>
@@ -97,6 +96,9 @@ export default function AdminPage() {
               token={accessToken}
               setUsers={setUserStats}
             />
+            <hr className="custom-hr mt-4" />
+            <PropertyTable data={propertyData} token={accessToken} />
+            <hr className="custom-hr mt-4" />
           </div>
         </>
       )}

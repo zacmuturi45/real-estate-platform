@@ -121,7 +121,7 @@ a {
   object-fit: cover;
 }
 
-.card-amount {
+.card-amount h6 {
   color: var(--color-primary);
   text-decoration: underline;
 }
@@ -222,7 +222,8 @@ form.search label {
 }
 
 .guard h6,
-.dashboard h5,h6 {
+.dashboard h5,
+h6 {
   color: var(--gray-darker);
 }
 
@@ -230,9 +231,15 @@ form.search label {
   color: var(--color-primary);
 }
 
-.stats-cards {
-  box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.06);
-  border: 1px solid var(--gray-darker);
+.stats-cards:not(:first-child) {
+  border-left: 1px solid var(--gray-variant);
+}
+
+.stats-count {
+  border: 1px solid var(--gray-variant);
+}
+
+.stats-padding {
   padding: 15px;
 }
 
@@ -240,8 +247,26 @@ form.search label {
   cursor: pointer;
 }
 
-.custom-table tbody tr:hover {
-  color: var(--color-white);
+.properties-add {
   background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
 }
 
+#modal-heading {
+  color: var(--gray-darker);
+}
+
+.custom-submit-btn {
+  background-color: var(--color-primary);
+  border: 0;
+}
+
+.custom-close-btn {
+  background-color: var(--gray-darker);
+  border: 0;
+}
+
+.custom-hr {
+  color: var(--gray-variant);
+}
