@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PropertyModal from "./PropertyModal";
 import React, { useState } from "react";
 
-export default function PropertyTable({ data }) {
+export default function PropertyTable({ data, token }) {
   const openModal = () => {
     const modal = new window.bootstrap.Modal(
       document.getElementById("propertyModal")
@@ -11,7 +11,26 @@ export default function PropertyTable({ data }) {
   };
 
   const handleClick = (id) => {
-    console.log("Clicked id: ", id);
+    fetch(`/properties/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.text();
+      })
+      .then(() => {
+        alert("Property deleted successfully");
+        console.log("Property deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error.message);
+      });
   };
 
   return (
