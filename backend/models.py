@@ -66,6 +66,6 @@ class Enquiry(db.Model, SerializerMixin):
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
-    property_id = db.Column(db.Integer, db.ForeignKey('properties.id'), nullable=False)
+    property_id = db.Column(db.Integer, db.ForeignKey('properties.id', ondelete='CASCADE'), nullable=False)
     message = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
