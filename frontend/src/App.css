@@ -117,9 +117,11 @@ a {
 .property-card img {
   border-radius: 0;
   border: 0;
+  height: 200px;
+  object-fit: cover;
 }
 
-.card-amount {
+.card-amount h6 {
   color: var(--color-primary);
   text-decoration: underline;
 }
@@ -194,7 +196,7 @@ form.search label {
   font-weight: 600;
 }
 
-.property-description p{
+.property-description p {
   color: var(--gray-variant);
 }
 
@@ -207,7 +209,7 @@ form.search label {
   padding: 35px;
 }
 
-.tour-card p{
+.tour-card p {
   margin-bottom: 0;
 }
 
@@ -216,5 +218,55 @@ form.search label {
 }
 
 .tour-card span {
+  color: var(--gray-variant);
+}
+
+.guard h6,
+.dashboard h5,
+h6 {
+  color: var(--gray-darker);
+}
+
+.dashboard h3 {
+  color: var(--color-primary);
+}
+
+.stats-cards:not(:first-child) {
+  border-left: 1px solid var(--gray-variant);
+}
+
+.stats-count {
+  border: 1px solid var(--gray-variant);
+}
+
+.stats-padding {
+  padding: 15px;
+}
+
+.custom-table tbody tr {
+  cursor: pointer;
+}
+
+.properties-add {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+}
+
+#modal-heading {
+  color: var(--gray-darker);
+}
+
+.custom-submit-btn {
+  background-color: var(--color-primary);
+  border: 0;
+}
+
+.custom-close-btn {
+  background-color: var(--gray-darker);
+  border: 0;
+}
+
+.custom-hr {
   color: var(--gray-variant);
 }

@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, reqparse, abort
 from models import db, Property
+from flask_jwt_extended import jwt_required
 
 property_bp = Blueprint('property', __name__)
 api = Api(property_bp) 
@@ -30,6 +31,7 @@ class Properties(Resource):
         response = [property.to_dict() for property in properties]
         return response
 
+    @jwt_required()
     def post(self):
         data = post_args.parse_args()
         property = Property.query.get(data.id)
@@ -47,6 +49,7 @@ class PropertyById(Resource):
             abort(404, detail=f'property with {id=} does not exist')
         return property.to_dict()
 
+    @jwt_required()
     def patch(self,id):
         property = Property.query.get(id)
         if not property:
@@ -61,6 +64,7 @@ class PropertyById(Resource):
 
         return property.to_dict()
 
+    @jwt_required()
     def delete(self,id):
         property = Property.query.filter_by(id=id).first()
         if not property:

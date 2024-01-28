@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://127.0.0.1:5000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -9,6 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.21.3",
+    "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -37,6 +39,6 @@
     ]
   },
   "devDependencies": {
-    "react-router-dom": "^6.21.3"
+    "@types/react-router-dom": "^5.3.3"
   }
 }

@@ -10,8 +10,13 @@ flask-sqlalchemy = "*"
 faker = "*"
 flask-restful = "*"
 sqlalchemy-serializer = "*"
+flask-bcrypt = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+flask-jwt-extended = "*"
+flask-cors = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "3.9"
