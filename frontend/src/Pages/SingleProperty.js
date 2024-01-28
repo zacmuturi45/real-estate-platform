@@ -51,9 +51,12 @@ export default function SingleProperty() {
                   {`Kshs. ${prp.price}`} <span>/month</span>
                 </h5>
               </div>
-              <div className="mt-2">
+              <div className="mt-2 d-flex flex-column">
                 <Link className="btn btn-primary nav-signup-btn mt-2">
                   Request Tour
+                </Link>
+                <Link className="btn btn-primary nav-signup-btn mt-2">
+                  Add to Favorites
                 </Link>
               </div>
             </div>
