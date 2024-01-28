@@ -5,6 +5,7 @@ import AuthGuard from "../Components/AuthGuard";
 import UserTable from "../Components/UserTable";
 import { Link } from "react-router-dom";
 import PropertyTable from "../Components/PropertyTable";
+import EnquiriesTable from "../Components/EnquiriesTable";
 
 export default function AdminPage() {
   const { user, isAdmin, propertyData, accessToken } =
@@ -99,6 +100,7 @@ export default function AdminPage() {
             <hr className="custom-hr mt-4" />
             <PropertyTable data={propertyData} token={accessToken} />
             <hr className="custom-hr mt-4" />
+            <EnquiriesTable token={accessToken} />
           </div>
         </>
       )}
