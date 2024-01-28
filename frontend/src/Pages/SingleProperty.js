@@ -23,7 +23,7 @@ export default function SingleProperty() {
         <div className="d-flex align-content-center mt-3">
           <Link to={"/"}>
             <i className="fa-solid fa-arrow-left me-2"></i>
-            Back to Property Listings
+            Back to Property Listings.
           </Link>
         </div>
         <div className="mt-2 property-title">
