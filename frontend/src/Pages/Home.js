@@ -65,7 +65,7 @@ export default function Home() {
       <Navbar />
       <div className="container-lgs d-flex justify-content-end align-content-center mt-3 mb-3">
         <Link>
-          {isAdmin ? "Admin": "User"} {`>`} {user}
+          {isAdmin ? "Admin": "User"} {`>`} {user || "No user Logged in"}
         </Link>
       </div>
       <Search onSearch={handleSearch} />
