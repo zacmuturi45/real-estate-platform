@@ -1,10 +1,18 @@
 import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
+import EnquiryModel from "../Components/EnquiryModel";
 
 export default function SingleProperty() {
   const params = useParams();
   const [prp, setPrp] = useState([]);
+
+  const handleEnquiry = () => {
+    const modal = new window.bootstrap.Modal(
+      document.getElementById("enquiryModel")
+    );
+    modal.show();
+  };
 
   useEffect(() => {
     fetch("/properties")
@@ -52,7 +60,10 @@ export default function SingleProperty() {
                 </h5>
               </div>
               <div className="mt-2 d-flex flex-column">
-                <Link className="btn btn-primary nav-signup-btn mt-2">
+                <Link
+                  className="btn btn-primary nav-signup-btn mt-2"
+                  onClick={() => handleEnquiry()}
+                >
                   Request Tour
                 </Link>
                 <Link className="btn btn-primary nav-signup-btn mt-2">
@@ -63,6 +74,7 @@ export default function SingleProperty() {
           </div>
         </div>
       </div>
+      <EnquiryModel property_id={prp.id}/>
     </>
   );
 }
