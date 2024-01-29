@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow.fields import Nested
-from models import User, Enquiry
+from models import User, Enquiry, SavedListing
 
 ma = Marshmallow()
 
@@ -21,3 +21,15 @@ class EnquirySchema(ma.SQLAlchemyAutoSchema):
     property_id = ma.auto_field()
     message = ma.auto_field()
     timestamp = ma.auto_field()
+
+
+class SavedListingSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = SavedListing
+
+    id = ma.auto_field()
+    user_id = ma.auto_field()
+    property_id = ma.auto_field()
+    timestamp = ma.auto_field()
+    tag = ma.auto_field()
+

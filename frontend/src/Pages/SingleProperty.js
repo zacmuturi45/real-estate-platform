@@ -1,11 +1,38 @@
 import { Link, useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import EnquiryModel from "../Components/EnquiryModel";
+import { PropertyContext } from "../Contexts/PropertyContext";
 
 export default function SingleProperty() {
   const params = useParams();
   const [prp, setPrp] = useState([]);
+  const {userid} = useContext(PropertyContext)
+
+  const addToFavorites = async () => {
+    try {
+      const response = await fetch("/savedlistings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: userid, 
+          property_id: prp.id,
+          tag: "favorite", 
+        }),
+      });
+      
+      if (response.ok) {
+        alert("Added to favorites successfully");
+      } else {
+        alert("Failed to add to favorites");
+      }
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      alert("Failed to add to favorites");
+    }
+  };
 
   const handleEnquiry = () => {
     const modal = new window.bootstrap.Modal(
@@ -66,9 +93,9 @@ export default function SingleProperty() {
                 >
                   Make an Enquiry
                 </Link>
-                <Link className="btn btn-primary nav-signup-btn mt-2">
+                <button className="btn btn-primary nav-signup-btn mt-2" onClick={addToFavorites}>
                   Add to Favorites
-                </Link>
+                </button>
               </div>
             </div>
           </div>
