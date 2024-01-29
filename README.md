@@ -20,6 +20,14 @@ Welcome to **Shelter Scape**, a mini web app, where users can check for property
 - Contact Forms: Users can inquire about a property directly through a contact form, facilitating communication between buyers and sellers.
 - User Authentication: Secure user authentication ensures data privacy and allows users to manage their saved listings.
 
+## Models and Relationships
+
+- `User` - A user is able to sign up if they do not have an account and log in if they do. A user can either be a normal user or an Admin. A user can view property listings, save a property to favourites and enquire about the property. An admin can view a list of all users, add, delete and edit a property and view a list of all user enquiries.
+- `Profile` - After a user signs up their profile details are saved. Has one to one relationship with User.
+- `Property` - The individual houses displayed on the page. Has a relationship with user through enquiry and savedlisting model. Has many to many relationship with the user as a user can save many properties and a property can be saved by many users.
+- `SavedListing` - Represents when a user saves a property to favorites. Has one to many relationship with User as one user can save many listings.
+- `Enquiry` - Represent when a user requests for a house tour. Has one to many relationship with user.
+
 ## Routes
 
 Some of the endpoints include:
@@ -57,7 +65,61 @@ This is used when the user clicks the 'Add-to-favourites' button
   }
 }
 ```
+### GET users/<user_id>
 
+This is to get individual user details.
+
+```json
+{
+    "id": 1,
+    "username": "example_user",
+    "email": "user@example.com",
+    "isAdmin": false,
+    "profile": {
+        "firstname": "John",
+        "lastname": "Doe",
+        "email": "john.doe@example.com"
+    },
+    "properties": [
+        {
+            "id": 1,
+            "title": "Property 1",
+            "description": "Description of Property 1",
+            "price": 100000,
+            "location": "Location of Property 1",
+            "image": "http://example.com/image1.jpg",
+            "isAvailable": true,
+            "property_type": "House"
+        },
+        {
+            "id": 2,
+            "title": "Property 2",
+            "description": "Description of Property 2",
+            "price": 150000,
+            "location": "Location of Property 2",
+            "image": "http://example.com/image2.jpg",
+            "isAvailable": true,
+            "property_type": "Apartment"
+        }
+    ],
+    "saved_listings": [
+        {
+            "id": 1,
+            "property_id": 1,
+            "timestamp": "2024-01-29T12:00:00Z",
+            "tag": "favorite"
+        }
+    ],
+    "enquiries": [
+        {
+            "id": 1,
+            "property_id": 1,
+            "message": "I'm interested in this property.",
+            "timestamp": "2024-01-29T12:00:00Z"
+        }
+    ]
+}
+```
 ## License
 
 This project is licesed under the MIT terms and conditions.
